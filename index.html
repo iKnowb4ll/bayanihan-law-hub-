@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#123d2c">
-<meta name="description" content="Bayanihan — learn Philippine laws and your rights through friendly quizzes, scenarios, and trusted news sources.">
+<meta name="description" content="Bayanihan — learn Philippine laws and your rights through friendly quizzes, scenarios, and trusted legal resources.">
 <title>BAYANIHAN | Filipino Law & Rights Hub</title>
 <style>
 :root{--green:#123d2c;--green2:#1d6044;--gold:#e8bd61;--cream:#fff8e9;--paper:#fffdf7;--red:#a93632;--ink:#203128;--muted:#68756c;--line:#e9dfc9;--shadow:0 12px 35px #153b2a16}
@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="topline"></div>
-<header><nav class="nav"><a class="brand" href="#home"><span class="seal">⚖</span><span><strong>BAYANIHAN</strong><small>THE FILIPINO LAW & RIGHTS HUB</small></span></a><div class="navlinks"><a href="#games">Law Games</a><a href="#scenarios">Situations</a><a href="#news">PH News</a><a href="#laws">Know Your Rights</a></div></nav></header>
+<header><nav class="nav"><a class="brand" href="#home"><span class="seal">⚖</span><span><strong>BAYANIHAN</strong><small>THE FILIPINO LAW & RIGHTS HUB</small></span></a><div class="navlinks"><a href="#games">Law Games</a><a href="#scenarios">Situations</a><a href="#laws">Know Your Rights</a></div></nav></header>
 <main id="home">
 <section class="hero"><div class="hero-inner"><div class="eyebrow">KARUNUNGAN • KARAPATAN • KATARUNGAN</div><h1>Know the law.<br>Understand your rights.</h1><p>Explore Philippine laws in a friendlier way. Test what you know, think through everyday situations, and find trusted places to read more.</p><div class="actions"><a href="#games"><button class="btn primary">Play a Law Quiz →</button></a><a href="#laws"><button class="btn outline">Explore the Law Library</button></a></div></div></section>
 <div class="wrap" style="padding-top:0;padding-bottom:20px"><div class="stats"><div class="stat"><b>01</b><span>Learn at your own pace</span></div><div class="stat"><b>02</b><span>Practice with scenarios</span></div><div class="stat"><b>03</b><span>Find official sources</span></div></div></div>
@@ -25,8 +25,6 @@
 <div class="scenario"><div class="card-icon">📱</div><h3>Someone shares your photo without permission</h3><p>A classmate posts your personal photo and private details publicly, and you feel uncomfortable.</p><select id="s1"><option value="">Choose a response…</option><option value="a">Save relevant evidence, ask for help from a trusted adult, and report the post through the platform.</option><option value="b">Share their private information in return.</option><option value="c">Threaten them online.</option></select><button class="btn primary" onclick="checkScenario(1)">Check my choice</button><p class="scenario-result" id="r1"></p></div>
 <div class="scenario"><div class="card-icon">🏫</div><h3>You witness bullying at school</h3><p>You see a student being repeatedly humiliated by classmates.</p><select id="s2"><option value="">Choose a response…</option><option value="a">Join in so you won't be targeted.</option><option value="b">Safely support the student and report the incident to a trusted teacher or school authority.</option><option value="c">Post the incident online to embarrass everyone.</option></select><button class="btn primary" onclick="checkScenario(2)">Check my choice</button><p class="scenario-result" id="r2"></p></div>
 </div></div></section>
-<section class="wrap" id="news"><div class="section-head"><div><div class="kicker">STAY INFORMED</div><h2>Philippine News & Public Updates</h2><p>Use trusted Philippine newsrooms and official agencies for current reports, announcements, and public advisories.</p></div></div>
-<div class="news-list" id="newsList"><article class="news-card"><div class="tag">PHILIPPINE NEWS</div><h3>Loading the latest headlines…</h3><p>Please wait while the latest available news is loaded.</p></article></div><p class="news-note" id="newsNote">Daily update scheduled for 8:00 AM Philippine time. Headlines link to their original publishers.</p><button class="text-btn" id="refreshNews" type="button">↻ Refresh headlines</button></p></section>
 <section class="wrap" id="laws"><div class="section-head"><div><div class="kicker">A STARTING POINT</div><h2>Know Your Rights Library</h2><p>Search these selected Philippine laws and legal resources. Summaries are simplified introductions, not complete legal interpretations.</p></div></div><div class="law-tools"><input id="lawSearch" type="search" placeholder="Search a law, topic, or keyword…"><select id="lawCategory"><option value="all">All topics</option><option value="rights">Rights & protection</option><option value="digital">Digital life</option><option value="school">Education</option><option value="community">Community & environment</option><option value="consumer">Consumer & work</option></select></div><div class="law-grid" id="lawGrid"></div><div class="notice"><b>Important:</b> This website is for general educational purposes only. Laws can be amended, and how a law applies depends on the facts. For personal legal concerns, ask a qualified lawyer or an appropriate government office. If you are in immediate danger, seek help from a trusted adult or local emergency services.</div></section>
 <section class="wrap" style="padding-top:0"><div class="section-head"><div><div class="kicker">GO TO THE SOURCE</div><h2>Useful Official Resources</h2><p>Read primary sources and seek help from the appropriate public offices.</p></div></div><div class="sources"><a href="https://lawphil.net/" target="_blank" rel="noopener">Lawphil Project ↗</a><a href="https://www.officialgazette.gov.ph/" target="_blank" rel="noopener">Official Gazette ↗</a><a href="https://pao.gov.ph/" target="_blank" rel="noopener">Public Attorney’s Office ↗</a><a href="https://chr.gov.ph/" target="_blank" rel="noopener">Commission on Human Rights ↗</a><a href="https://www.deped.gov.ph/" target="_blank" rel="noopener">Department of Education ↗</a></div></section>
 </main>
@@ -47,36 +45,6 @@ function renderQuiz(){answered=false;const item=quiz[qi];document.getElementById
 function answerQuiz(i){if(answered)return;answered=true;const item=quiz[qi];const buttons=[...document.querySelectorAll('.answer')];buttons.forEach((b,n)=>{b.disabled=true;if(n===item.c)b.classList.add('correct');if(n===i&&i!==item.c)b.classList.add('wrong')});if(i===item.c)score++;document.getElementById('score').textContent=score;const f=document.getElementById('feedback');f.innerHTML='<b>'+(i===item.c?'Correct!':'Not quite.')+'</b> '+item.e;f.classList.add('show');document.getElementById('next').disabled=false;document.getElementById('progress').style.width=((qi+1)/quiz.length*100)+'%'}
 document.getElementById('next').onclick=()=>{if(!answered)return;if(qi<quiz.length-1){qi++;renderQuiz()}else{document.getElementById('question').textContent='Quiz complete! You scored '+score+' out of '+quiz.length+'.';document.getElementById('answers').innerHTML='';document.getElementById('feedback').innerHTML='<b>Keep learning!</b> Revisit the explanations and check official sources to learn more.';document.getElementById('feedback').classList.add('show');document.getElementById('next').disabled=true;document.getElementById('next').textContent='Completed';document.getElementById('qcount').textContent='FINISHED'}};document.getElementById('restart').onclick=()=>{qi=0;score=0;renderQuiz()};renderQuiz();
 function checkScenario(n){const v=document.getElementById('s'+n).value;const good=n===1?'a':'b';const r=document.getElementById('r'+n);if(!v){r.textContent='Choose an option first.';return}r.textContent=v===good?'Good thinking. This choice prioritizes safety, documentation, and getting appropriate help.': 'That response could make the situation worse. Consider a safer approach that respects everyone’s rights and seeks help from a trusted person.'}
-async function loadDailyNews(){
- const list=document.getElementById('newsList');
- const note=document.getElementById('newsNote');
- const refresh=document.getElementById('refreshNews');
- if(!list||!note)return;
- if(refresh){refresh.disabled=true;refresh.textContent='Refreshing…'}
- try{
-  const response=await fetch('news.json?cache='+Date.now(),{cache:'no-store'});
-  if(!response.ok)throw new Error('News data is not available yet');
-  const data=await response.json();
-  if(!Array.isArray(data.headlines)||!data.headlines.length)throw new Error('No headlines are available yet');
-  list.replaceChildren();
-  data.headlines.slice(0,18).forEach(item=>{
-   const article=document.createElement('article');article.className='news-card';
-   const tag=document.createElement('div');tag.className='tag';
-   const when=item.published?new Date(item.published):null;
-   tag.textContent=(item.source||'PHILIPPINE NEWS')+(when&&!isNaN(when)?' • '+when.toLocaleString('en-PH',{dateStyle:'medium',timeStyle:'short',timeZone:'Asia/Manila'}):'');
-   const title=document.createElement('h3');title.textContent=item.title||'Untitled report';
-   const desc=document.createElement('p');desc.textContent='Read the full report from the original publisher. Check the article for updates and corrections.';
-   const link=document.createElement('a');link.href=item.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Read original report ↗';
-   article.append(tag,title,desc,link);list.append(article);
-  });
-  note.textContent='Last updated: '+(data.updated_display||'recently')+'. Headlines are collected from public RSS feeds. Open the original report for full details, context, and corrections.';
- }catch(error){
-  list.innerHTML='<article class="news-card"><div class="tag">NEWS UPDATE</div><h3>Headlines are temporarily unavailable</h3><p>The automatic news update may still be running. You can visit these publishers directly for current reports.</p><a href="https://www.pna.gov.ph/latest-news" target="_blank" rel="noopener">Philippine News Agency ↗</a><br><a href="https://www.gmanetwork.com/news/" target="_blank" rel="noopener">GMA News ↗</a><br><a href="https://www.philstar.com/" target="_blank" rel="noopener">The Philippine Star ↗</a></article>';
-  note.textContent='The daily feed has not loaded. Try refreshing later or open a publisher directly.';
- }finally{if(refresh){refresh.disabled=false;refresh.textContent='↻ Refresh headlines'}}
-}
-document.getElementById('refreshNews')?.addEventListener('click',loadDailyNews);
-loadDailyNews();
 const laws=[
 ['1987 Philippine Constitution','Fundamental rights, government structure, and the basic law of the country.','rights','Constitution'],
 ['RA 7438','Rights of persons arrested, detained, or under custodial investigation, including access to counsel.','rights','Custodial rights'],
